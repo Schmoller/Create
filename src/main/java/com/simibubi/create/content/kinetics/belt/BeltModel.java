@@ -34,7 +34,7 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 		if (!data.hasProperty(CASING_PROPERTY))
 			return super.getParticleIcon(data);
 		CasingType type = data.getData(CASING_PROPERTY);
-		if (type == CasingType.NONE || type == CasingType.BRASS)
+		if (type == CasingType.NONE || type == CasingType.BRASS || type == CasingType.INDUSTRIAL_IRON)
 			return super.getParticleIcon(data);
 		if (type == CasingType.COPPER)
 			return AllSpriteShifts.COPPER_CASING.getOriginal();
@@ -64,6 +64,7 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 				case ANDESITE -> alongX ? AllPartialModels.ANDESITE_BELT_COVER_X : AllPartialModels.ANDESITE_BELT_COVER_Z;
 				case BRASS -> alongX ? AllPartialModels.BRASS_BELT_COVER_X : AllPartialModels.BRASS_BELT_COVER_Z;
 				case COPPER -> alongX ? AllPartialModels.COPPER_BELT_COVER_X : AllPartialModels.COPPER_BELT_COVER_Z;
+				case INDUSTRIAL_IRON -> alongX ? AllPartialModels.INDUSTRIAL_IRON_BELT_COVER_X : AllPartialModels.INDUSTRIAL_IRON_BELT_COVER_Z;
 				default -> throw new IllegalStateException("Invalid casing type " + type);
 			};
 
@@ -77,6 +78,7 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 
 		var spriteShift = switch(type) {
 			case COPPER -> AllSpriteShifts.COPPER_BELT_CASING;
+			case INDUSTRIAL_IRON -> AllSpriteShifts.INDUSTRIAL_IRON_BELT_CASING;
 			default -> AllSpriteShifts.ANDESIDE_BELT_CASING;
 		};
 

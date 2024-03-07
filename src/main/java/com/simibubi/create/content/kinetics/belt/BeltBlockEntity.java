@@ -80,7 +80,7 @@ public class BeltBlockEntity extends KineticBlockEntity {
 	public BeltLighter lighter;
 
 	public static enum CasingType {
-		NONE, ANDESITE, BRASS, COPPER;
+		NONE, ANDESITE, BRASS, COPPER, INDUSTRIAL_IRON;
 	}
 
 	public BeltBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -448,6 +448,7 @@ public class BeltBlockEntity extends KineticBlockEntity {
 				case ANDESITE -> AllBlocks.ANDESITE_CASING.getDefaultState();
 				case BRASS -> AllBlocks.BRASS_CASING.getDefaultState();
 				case COPPER -> AllBlocks.COPPER_CASING.getDefaultState();
+				case INDUSTRIAL_IRON -> AllBlocks.INDUSTRIAL_IRON_BLOCK.getDefaultState();
 				default -> throw new IllegalStateException("Invalid casing type " + type);
 			};
 
