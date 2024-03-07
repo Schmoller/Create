@@ -25,8 +25,6 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 	public static final ModelProperty<CasingType> CASING_PROPERTY = new ModelProperty<>();
 	public static final ModelProperty<Boolean> COVER_PROPERTY = new ModelProperty<>();
 
-	private static final SpriteShiftEntry SPRITE_SHIFT = AllSpriteShifts.ANDESIDE_BELT_CASING;
-
 	public BeltModel(BakedModel template) {
 		super(template);
 	}
@@ -38,6 +36,8 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 		CasingType type = data.getData(CASING_PROPERTY);
 		if (type == CasingType.NONE || type == CasingType.BRASS)
 			return super.getParticleIcon(data);
+		if (type == CasingType.COPPER)
+			return AllSpriteShifts.COPPER_CASING.getOriginal();
 		return AllSpriteShifts.ANDESITE_CASING.getOriginal();
 	}
 
@@ -59,19 +59,31 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 		if (cover) {
 			boolean alongX = state.getValue(BeltBlock.HORIZONTAL_FACING)
 				.getAxis() == Axis.X;
-			BakedModel coverModel =
-				(brassCasing ? alongX ? AllPartialModels.BRASS_BELT_COVER_X : AllPartialModels.BRASS_BELT_COVER_Z
-					: alongX ? AllPartialModels.ANDESITE_BELT_COVER_X : AllPartialModels.ANDESITE_BELT_COVER_Z).get();
+
+			var coverModelPartial = switch (type) {
+				case ANDESITE -> alongX ? AllPartialModels.ANDESITE_BELT_COVER_X : AllPartialModels.ANDESITE_BELT_COVER_Z;
+				case BRASS -> alongX ? AllPartialModels.BRASS_BELT_COVER_X : AllPartialModels.BRASS_BELT_COVER_Z;
+				case COPPER -> alongX ? AllPartialModels.COPPER_BELT_COVER_X : AllPartialModels.COPPER_BELT_COVER_Z;
+				default -> throw new IllegalStateException("Invalid casing type " + type);
+			};
+
+			BakedModel coverModel = coverModelPartial.get();
+
 			quads.addAll(coverModel.getQuads(state, side, rand, extraData));
 		}
 
 		if (brassCasing)
 			return quads;
 
+		var spriteShift = switch(type) {
+			case COPPER -> AllSpriteShifts.COPPER_BELT_CASING;
+			default -> AllSpriteShifts.ANDESIDE_BELT_CASING;
+		};
+
 		for (int i = 0; i < quads.size(); i++) {
 			BakedQuad quad = quads.get(i);
 			TextureAtlasSprite original = quad.getSprite();
-			if (original != SPRITE_SHIFT.getOriginal())
+			if (original != spriteShift.getOriginal())
 				continue;
 
 			BakedQuad newQuad = BakedQuadHelper.clone(quad);
@@ -80,8 +92,8 @@ public class BeltModel extends BakedModelWrapper<BakedModel> {
 			for (int vertex = 0; vertex < 4; vertex++) {
 				float u = BakedQuadHelper.getU(vertexData, vertex);
 				float v = BakedQuadHelper.getV(vertexData, vertex);
-				BakedQuadHelper.setU(vertexData, vertex, SPRITE_SHIFT.getTargetU(u));
-				BakedQuadHelper.setV(vertexData, vertex, SPRITE_SHIFT.getTargetV(v));
+				BakedQuadHelper.setU(vertexData, vertex, spriteShift.getTargetU(u));
+				BakedQuadHelper.setV(vertexData, vertex, spriteShift.getTargetV(v));
 			}
 
 			quads.set(i, newQuad);

@@ -77,6 +77,7 @@ public class AllSpriteShifts {
 		BELT_OFFSET = get("block/belt_offset", "block/belt_scroll"),
 		BELT_DIAGONAL = get("block/belt_diagonal", "block/belt_diagonal_scroll"),
 		ANDESIDE_BELT_CASING = get("block/belt/brass_belt_casing", "block/belt/andesite_belt_casing"),
+		COPPER_BELT_CASING = get("block/belt/brass_belt_casing", "block/belt/copper_belt_casing"),
 		CRAFTER_THINGIES = get("block/crafter_thingies", "block/crafter_thingies");
 
 	static {

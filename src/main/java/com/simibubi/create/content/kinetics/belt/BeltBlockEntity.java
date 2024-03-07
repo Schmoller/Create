@@ -80,7 +80,7 @@ public class BeltBlockEntity extends KineticBlockEntity {
 	public BeltLighter lighter;
 
 	public static enum CasingType {
-		NONE, ANDESITE, BRASS;
+		NONE, ANDESITE, BRASS, COPPER;
 	}
 
 	public BeltBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -442,11 +442,17 @@ public class BeltBlockEntity extends KineticBlockEntity {
 			level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 16);
 			return;
 		}
-		
-		if (casing != CasingType.NONE)
-			level.levelEvent(2001, worldPosition,
-				Block.getId(casing == CasingType.ANDESITE ? AllBlocks.ANDESITE_CASING.getDefaultState()
-					: AllBlocks.BRASS_CASING.getDefaultState()));
+
+		if (casing != CasingType.NONE) {
+			var casingState = switch (casing) {
+				case ANDESITE -> AllBlocks.ANDESITE_CASING.getDefaultState();
+				case BRASS -> AllBlocks.BRASS_CASING.getDefaultState();
+				case COPPER -> AllBlocks.COPPER_CASING.getDefaultState();
+				default -> throw new IllegalStateException("Invalid casing type " + type);
+			};
+
+			level.levelEvent(2001, worldPosition, Block.getId(casingState));
+		}
 		if (blockState.getValue(BeltBlock.CASING) != shouldBlockHaveCasing)
 			KineticBlockEntity.switchToBlockState(level, worldPosition,
 				blockState.setValue(BeltBlock.CASING, shouldBlockHaveCasing));

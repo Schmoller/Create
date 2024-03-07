@@ -313,6 +313,12 @@ public class BeltBlock extends HorizontalKineticBlock
 			return InteractionResult.SUCCESS;
 		}
 
+		if (AllBlocks.COPPER_CASING.isIn(heldItem)) {
+			withBlockEntityDo(world, pos, be -> be.setCasingType(CasingType.COPPER));
+			updateCoverProperty(world, pos, world.getBlockState(pos));
+			return InteractionResult.SUCCESS;
+		}
+
 		return InteractionResult.PASS;
 	}
 
