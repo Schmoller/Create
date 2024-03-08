@@ -862,7 +862,7 @@ public class AllBlockEntityTypes {
 
 	public static final BlockEntityEntry<CopycatBlockEntity> COPYCAT =
 		REGISTRATE.blockEntity("copycat", CopycatBlockEntity::new)
-			.validBlocks(AllBlocks.COPYCAT_PANEL, AllBlocks.COPYCAT_STEP, AllBlocks.COPYCAT_PLATE)
+			.validBlocks(AllBlocks.COPYCAT_PANEL, AllBlocks.COPYCAT_STEP, AllBlocks.COPYCAT_PLATE, AllBlocks.COPYCAT_SLAB)
 			.register();
 
 	public static final BlockEntityEntry<FlapDisplayBlockEntity> FLAP_DISPLAY = REGISTRATE

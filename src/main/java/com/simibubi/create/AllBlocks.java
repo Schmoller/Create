@@ -66,6 +66,8 @@ import com.simibubi.create.content.decoration.copycat.CopycatPanelBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatPanelModel;
 import com.simibubi.create.content.decoration.copycat.CopycatPlateBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatPlateModel;
+import com.simibubi.create.content.decoration.copycat.CopycatSlabBlock;
+import com.simibubi.create.content.decoration.copycat.CopycatSlabModel;
 import com.simibubi.create.content.decoration.copycat.CopycatStepBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatStepModel;
 import com.simibubi.create.content.decoration.copycat.SpecialCopycatPanelBlockState;
@@ -2054,6 +2056,15 @@ public class AllBlocks {
 			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), c::get, 4))
 			.transform(customItemModel("copycat_base", "step"))
 			.register();
+
+	public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
+		REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
+				.transform(BuilderTransformers.copycat())
+				.onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
+				.item()
+				.recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), c::get, 4))
+				.transform(customItemModel("copycat_base", "slab"))
+				.register();
 
 	public static final BlockEntry<CopycatPanelBlock> COPYCAT_PANEL =
 		REGISTRATE.block("copycat_panel", CopycatPanelBlock::new)
