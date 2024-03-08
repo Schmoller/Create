@@ -64,6 +64,8 @@ import com.simibubi.create.content.decoration.bracket.BracketGenerator;
 import com.simibubi.create.content.decoration.copycat.CopycatBarsModel;
 import com.simibubi.create.content.decoration.copycat.CopycatPanelBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatPanelModel;
+import com.simibubi.create.content.decoration.copycat.CopycatPlateBlock;
+import com.simibubi.create.content.decoration.copycat.CopycatPlateModel;
 import com.simibubi.create.content.decoration.copycat.CopycatStepBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatStepModel;
 import com.simibubi.create.content.decoration.copycat.SpecialCopycatPanelBlockState;
@@ -2060,6 +2062,15 @@ public class AllBlocks {
 			.item()
 			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), c::get, 4))
 			.transform(customItemModel("copycat_base", "panel"))
+			.register();
+
+	public static final BlockEntry<CopycatPlateBlock> COPYCAT_PLATE =
+		REGISTRATE.block("copycat_plate", CopycatPlateBlock::new)
+			.transform(BuilderTransformers.copycat())
+			.onRegister(CreateRegistrate.blockModel(() -> CopycatPlateModel::new))
+			.item()
+			.recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), c::get, 4))
+			.transform(customItemModel("copycat_base", "plate"))
 			.register();
 
 	public static final BlockEntry<WrenchableDirectionalBlock> COPYCAT_BARS =

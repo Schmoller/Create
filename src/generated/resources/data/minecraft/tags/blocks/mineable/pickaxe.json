@@ -172,6 +172,7 @@
     "create:copycat_base",
     "create:copycat_step",
     "create:copycat_panel",
+    "create:copycat_plate",
     "create:andesite_door",
     "create:brass_door",
     "create:copper_door",

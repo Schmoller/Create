@@ -32,6 +32,7 @@ public class AllShapes {
 		CASING_11PX = shape(0, 0, 0, 16, 11, 16).forDirectional(),
 		CASING_3PX = shape(0, 0, 0, 16, 3, 16).forDirectional(),
 		CASING_2PX = shape(0, 0, 0, 16, 2, 16).forDirectional(),
+		CASING_1PX = shape(0, 0, 0, 16, 1, 16).forDirectional(),
 		MOTOR_BLOCK = shape(3, 0, 3, 13, 14, 13).forDirectional(),
 
 		FOUR_VOXEL_POLE = shape(6, 0, 6, 10, 16, 10).forAxis(), SIX_VOXEL_POLE = shape(5, 0, 5, 11, 16, 11).forAxis(),

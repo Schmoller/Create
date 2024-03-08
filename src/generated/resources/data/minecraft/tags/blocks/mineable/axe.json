@@ -97,6 +97,7 @@
     "create:clipboard",
     "create:copycat_step",
     "create:copycat_panel",
+    "create:copycat_plate",
     "create:white_seat",
     "create:orange_seat",
     "create:magenta_seat",
